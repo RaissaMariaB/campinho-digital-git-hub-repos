@@ -13,7 +13,7 @@ function App() {
     fetch(`${baseUrl}users/raissamariab/repos`)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
+        console.log('',data);
         setRepos(data);
         return data;
     })
@@ -23,18 +23,16 @@ function App() {
   }, [])
 
     //Segunda etapa com o Axios
-    useEffect(() => {
-      axios(`${baseUrl}users/raissamariab/repos`)
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
-          setRepos(data);
-          return data;
-      })
-      .catch(e => {
-        return  console.log(e);
-      })
-    }, [])
+    // useEffect(() => {
+    //   axios.get(`${baseUrl}users/raissamariab/repos`)
+    //     .then(reponse => {
+    //       console.log(reponse.data);
+    //       setRepos(reponse.data);
+    //   })
+    //     .catch(e => {
+    //       return  console.log(e);
+    //   })
+    // }, [])
 
   return (
         <ul>

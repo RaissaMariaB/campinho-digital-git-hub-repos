@@ -10,7 +10,7 @@ export function useGet(url) {
     const [data, setData] = useState([])
 
     // nessa segunda etapa eu Crio um outro estado para otimizar meu hook fazendo o controle por exemplo de um loading na minha aplicação 
-    const [isFetching, setIsFetching] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
 
     //utilizo um use effect para realizar minha chamada logo no início do carregamento da minha aplicação
     useEffect(() => {    
@@ -23,10 +23,10 @@ export function useGet(url) {
             console.log(error);
         })
         .finally(() => {
-            setIsFetching(false)
+            setIsLoading(false)
         })        
     }, [])
 
    //desistruturando o retorno da chamada eu consigo acessar cada elemento, retornando mais coisas de forma independente
-    return { data, isFetching }
+    return { data, isLoading}
 }
