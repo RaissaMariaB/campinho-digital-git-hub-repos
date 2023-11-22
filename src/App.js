@@ -1,24 +1,50 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import './App.css';
 
+
 function App() {
+  //use state hook reponsável  por guardar um estado internamente na nossa aplicação e que atualização esse preenchimento de dado
+  const [repos, setRepos] = useState([])
+  const baseUrl = 'https://api.github.com/'
+
+  //primeira etapa apenas chamada nativa, sem o Axios
+  useEffect(() => {
+    fetch(`${baseUrl}users/raissamariab/repos`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        setRepos(data);
+        return data;
+    })
+    .catch(e => {
+      return  console.log(e);
+    })
+  }, [])
+
+    //Segunda etapa com o Axios
+    useEffect(() => {
+      axios(`${baseUrl}users/raissamariab/repos`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          setRepos(data);
+          return data;
+      })
+      .catch(e => {
+        return  console.log(e);
+      })
+    }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <ul>
+          {repos.map((cadaRepo) => {
+            return (<li>
+              {cadaRepo?.name}
+            </li>)
+          })
+        }
+        </ul>
   );
 }
 
